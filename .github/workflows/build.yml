@@ -23,11 +23,11 @@ jobs:
       - name: Read versions from Dockerfile
         id: version
         run: |
-          ULID_VERSION="$(grep -oP '^ARG ULID_VERSION=\K\S+' Dockerfile)"
+          ULID_VERSION="$(grep -oP '^ARG PGX_ULID_VERSION=\K\S+' Dockerfile)"
           PG_TAG="$(grep -oP '^FROM ghcr\.io/cloudnative-pg/postgresql:\K\S+' Dockerfile)"
           test -n "${ULID_VERSION}" && test -n "${PG_TAG}"
-          echo "ulid=${ULID_VERSION}" >> "$GITHUB_OUTPUT"
-          echo "tag=${ULID_VERSION}-${PG_TAG}" >> "$GITHUB_OUTPUT"
+          echo "ulid=v${ULID_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tag=v${ULID_VERSION}-${PG_TAG}" >> "$GITHUB_OUTPUT"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -49,8 +49,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          build-args: |
-            ULID_VERSION=${{ steps.version.outputs.ulid }}
           tags: |
             ${{ env.IMAGE }}:${{ steps.version.outputs.tag }}
             ${{ env.IMAGE }}:latest
