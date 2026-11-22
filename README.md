@@ -33,14 +33,14 @@ Image layout, which follows the CloudNativePG extension image convention:
 ## Building
 
 ```sh
-docker build -t ghcr.io/cloudnative-pg-ext/pgx_ulid:v0.2.3 .
-docker push ghcr.io/cloudnative-pg-ext/pgx_ulid:v0.2.3
+docker build -t ghcr.io/cloudnative-pg-ext/pgx_ulid:v0.2.3-18.6-minimal-trixie .
+docker push ghcr.io/cloudnative-pg-ext/pgx_ulid:v0.2.3-18.6-minimal-trixie
 ```
 
 To build a different upstream release, override the tag:
 
 ```sh
-docker build --build-arg ULID_VERSION=v0.2.3 -t ghcr.io/cloudnative-pg-ext/pgx_ulid:v0.2.3 .
+docker build --build-arg ULID_VERSION=v0.2.3 -t ghcr.io/cloudnative-pg-ext/pgx_ulid:v0.2.3-18.6-minimal-trixie .
 ```
 
 The build has two stages:
@@ -68,7 +68,7 @@ spec:
     extensions:
       - name: pgx_ulid
         image:
-          reference: ghcr.io/cloudnative-pg-ext/pgx_ulid:v0.2.3
+          reference: ghcr.io/cloudnative-pg-ext/pgx_ulid:v0.2.3-18.6-minimal-trixie
 ```
 
 Then create the extension in a database, either declaratively with a `Database` resource:
