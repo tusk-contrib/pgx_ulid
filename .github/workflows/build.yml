@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE: ghcr.io/cloudnative-pg-ext/pgx_ulid
+  IMAGE: ghcr.io/tusk-contrib/pgx_ulid
 
 jobs:
   build:
